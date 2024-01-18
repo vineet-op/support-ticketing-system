@@ -1,9 +1,7 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const navigate = useNavigate();
-
   return (
     <nav className="bg-gradient-to-r from-red-500 to-orange-500 p-4">
       <div className="container mx-auto flex items-center justify-between">

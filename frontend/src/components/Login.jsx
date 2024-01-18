@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
 
-function Signup() {
+const Login = () => {
   const history = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,15 +12,15 @@ function Signup() {
 
     try {
       await axios
-        .post("http://localhost:8000/signup", {
+        .post("http://localhost:8000/", {
           email,
           password,
         })
         .then((res) => {
           if (res.data == "exist") {
-            alert("User already exists");
-          } else if (res.data == "notexist") {
             history("/home", { state: { id: email } });
+          } else if (res.data == "notexist") {
+            alert("User have not sign up");
           }
         })
         .catch((e) => {
@@ -36,7 +35,7 @@ function Signup() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="max-w-md w-full bg-white p-8 rounded shadow-lg">
-        <h1 className="text-3xl font-semibold mb-4">Signup</h1>
+        <h1 className="text-3xl font-semibold mb-4">Login</h1>
 
         <form onSubmit={submit}>
           <div className="mb-4">
@@ -57,9 +56,9 @@ function Signup() {
           </div>
           <button
             type="submit"
-            className="w-full bg-green-500 text-white p-2 rounded"
+            className="w-full bg-blue-500 text-white p-2 rounded"
           >
-            Signup
+            Login
           </button>
         </form>
 
@@ -67,12 +66,12 @@ function Signup() {
           <p className="text-center">OR</p>
         </div>
 
-        <Link to="/login" className="text-blue-500">
-          Login Page
+        <Link to="/signup" className="text-blue-500">
+          Signup Page
         </Link>
       </div>
     </div>
   );
-}
+};
 
-export default Signup;
+export default Login;
